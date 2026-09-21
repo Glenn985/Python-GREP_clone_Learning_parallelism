@@ -1,0 +1,4 @@
+Problems i faced here, lack of initilisation of the dictioanry at first, 
+NExt I DID NOT WRITE DOWN THE ARCHITECURE< 
+THe thign is handel client is aliek a god function i have to break it down into many parts , 
+Handle client assigns a new Thread to every damn client we receive 

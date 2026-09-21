@@ -1,0 +1,104 @@
+We want to first build and test and print teh benchmark for larger files 100mb , 1gb etc
+for first purpose what we did was , create a dummy 100mb file 
+his THESE ARE THE COMMANDS
+Permission denied: Secret.txt
+glennmain@glenns-MacBook-Air python_grep % yes "Python is cool and this is a benchmark line for PGREP testing" | head -c 100M > test100mb.txt 
+
+
+IMPORTANT observations - for a 100mb file I got the speed as Time taken: 0.059916 inpsute of it only couintg a single appearence of the word Python
+for the Notes.txt that contained barely any files i got 7.000000000000062e-05 , SO CPU time heavily went into actually loading the thing into RAM im guessing
+
+Next i did a naive way of counting through ie 
+f.read will convert to a string and hten i searched it up wiht 
+count = content.lower().count(text.lower()) 
+
+THIS exploded in time for the 100 mb output was 
+NO of recurrences 1612904
+Time taken: 0.154743
+
+MEANING , if we were to have 10 + files of this size we are defenitely not going to be able to , do this effecitvely , it will take too much time 
+
+While doing , line by line, and counting no of recurrences , i got a even higher time compared to the previous 
+Python_Grep_V2.py PGREP  ~a test100mb.txt Python THESE ARE THE COMMANDS
+NO of recurrences 1612904
+Time taken: 0.293089 OF CPU TIME not the total time of running
+
+WHY is this the reason? 
+WHEN U THINK IN TERMS OF C porgramming, where u have to handle memory allocation , etc u. ll see
+Every single line forces Python to create a brand new string object, allocate memory for it, 
+destroy it when done, and check loop conditions.
+
+
+the difference between Wall clock timing and CPU timingwas also a lot more different when i implemneted SearchA(Whole thing in RAM) 
+
+
+
+FOR 1GB file we saw that 
+the program becomes a lot more CPU bound than IO bound 
+['~a'] These are the restrictions
+Python_Grep_V2.py PGREP  ~a test1gb.txt Python THESE ARE THE COMMANDS
+NO of recurrences 16129033
+Time taken: 2.603581
+Wall clock time taken: 2.609875790949445
+NO of recurrences 16129033
+Time taken: SearchA 1.308866
+Wall clock time taken SearchA: 1.3331665409496054
+glennmain@glenns-MacBook-Air python_grep % 
+
+WE got THis 
+
+
+
+NEXT WE ARE GOING TO LOOK AT ALL THE psutils for this program 
+We can get OS.getPID to get hte current programs process ID AND SEE how much like CPU and everything its using 
+pcputimes(user=3.637532672, system=0.592400064, children_user=0.0, children_system=0.0)
+
+and if m not wrong hte children_user is basicly fork()
+ON linux 
+tht is its clong hte CPU and memory and then a child process ilwl be run hwo much time goes 
+into that is the thing
+
+
+Implementing History + Grep
+history is basiclly just a commmand that goes through ur zsh files(all ur terminal commadns stored EXCEPT UR ACTIVE session ones) 
+BECAUSE active session is sitll in the RAM and grep is basicly an efficient ctrl + f
+
+
+HISTSIZE = how many history entries zsh keeps available in the running shell
+It controls your current session.It holds commands in active memory.It affects how many 
+past commands you can see right now.
+
+AND HISTSIZE is higher htan SAVEHIST - becoz every time u do up arrow, want to search fast , the previous commands, 
+it has to access from teh RAM instead of hte  hardisk for faster access
+
+
+
+SAVEHIST = how many entries zsh keeps in the history file when it saves
+past commnads htat i wrote are saved here - 
+~/.zsh_history THIS IS FROM TEH HARDISK - THATS WHY reading through this FILE I WAS NOT ABLE TO find , 
+the currentsession commands i was using 
+
+
+SAVEHIST will save hte most recent commands, becasue the thing about zsh is when power goes off the ram is off
+and zsh sitll wants u to get the previous atleast 1000 commands
+
+THATS WHY CLONING history is very hard it has to directly form the RAM look at key board types etc
+
+FOR using Subprocess to get history , since its a zsh file, u need powershell access also to run it 
+
+A CASE IS 
+SO if ur laptops dead and power is always oging off 
+ITS GOOD TO have the SAVEHIST to hgiher BECOZ 
+esp if u want to go thru previosu commands al ot
+
+
+I CHECKED THROUGH MY COMMAND , when i type 
+tail -20 ~/.zsh_history 
+I DNT GET HTE CURRENT WROKING ssh commands, iget much older ones because its not configured to write evrythign at once 
+
+OK but now that i closed terminal and checked back i got my previous commands in the hardisk itslef
+and this was read from the file 
+Once you closed the old zsh session, its RAM was gone.
+
+
+I found out that the content.lower() is takign up massive time of CPU 

@@ -1,0 +1,20 @@
+What is MMap, how does it make things faster? 
+Mmap - maps a file or device into your process's virtual memory address space
+meaning hte OS will deal with the , we are allocating a pathway for the file to be read in the 
+ram
+
+
+I did a differnt hting using a logical core, physical core on mac logical core vs physical core is the same 
+Physical core is basically 
+
+Usage per Core: [4.0, 2.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0]
+pcputimes(user=1.566737536, system=0.42146416, children_user=0.0, children_system=0.0)
+THIS IS HOW MUCH core was used for using binary search, 
+
+Not using Binar used 
+ogical Cores (Threads): 10
+Usage per Core: [6.0, 2.0, 3.0, 1.0, 0.0, 0.0, 3.0, 3.0, 2.0, 1.0]
+pcputimes(user=1.65704512, system=0.252188208, children_user=0.0, children_system=0.0)
+(venv) glennmain@glenns-MacBook-Air python_grep % 
+
+

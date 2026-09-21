@@ -1,0 +1,3 @@
+Threading Race condition
+time.sleep(0) dsnt waste time but sitll makes hte OS switch threrads. 
+we are havign a condition where temp will write somerthign 

@@ -1,0 +1,12 @@
+documentation 
+here i ran into a problem , where WHen client works but , when.2 clients send message, it does not works
+because c
+
+Currently we have a problem where ITS has to be sequentilly
+
+
+WE for imorvemnet are using threading.Lock() is a synchronization tool in Python used 
+to prevent multiple threads from accessing a shared resource at the same time
+
+made an error wehre i was touchign the sender thread twice, 
+the key point was for every new socket connection u need a new

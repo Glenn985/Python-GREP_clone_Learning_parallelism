@@ -1,0 +1,66 @@
+What is Python_Grep.py ? 
+IT is a command line argument based on Grep on mac,linux unix based system that will allow you to 
+go through a file, in ur own folder, if its not in that direcotry u add hte absolute path of the file 
+and u can get like valid line depending on the pattern u want, 
+
+IF PATH NOT GIVEN and its a ~r ie recursive it ll automaticaly take over ur like current working direcotry 
+
+IN MY version i implemented , the  architecure i did was , only go through .txt files, i stumbled across a porblme 
+it was , a file contained .txt but it wasnt utf 8 readble,  i implemented  except UnicodeDecodeError:  print(f"Could not decode file: {file_path}")
+
+I used os.walk which will go through all the files in teh directory, and go through all the files , 
+
+First design i did was , os.listdir it only lists within dsnt open the directory within the directory, 
+
+USed regex to parse and find like the  restrictiosn liek ~r for recurse 
+if ~r not there the program will not go through every other directory and file, 
+
+~a is anotehr case insesitivyt, that is if i write python even if the file lines contain PYthon or wtv it wll 
+still outpu teh
+
+PGREP  ~a /Users/glennmain/SAI.txt  this is the format - 
+PGREP then the commands ie starting with ~
+the directory u want to start from, 
+
+
+
+Problems i thought i woudl be facign when  building was permission error 
+I AM NOT WELL VERSED ENOUGH WITH HOW PERMISSIONS OWRK HAVE TO READ ON THAT 
+ except PermissionError:
+        print(f"Permission denied: {file_path}")
+
+
+FOR THIS i created a file Secret.txt 
+ls - l Secret.txt shows the permssions 
+at first it was 
+-rw-r--r--  1
+
+
+chmod o-r Secret.txt  - removed read permssion for others as well now i will run the program to see hte output hopefuly m expecting a permssion denied error
+This does not hide the file at all 
+BECASUE ITS STILL IN MY USER ACCOUNT 
+only if the user account itslef is different the permssion denied will work 
+
+when i did chmod u-r i got 
+Python_Grep.py PGREP  ~a Secret.txt This THESE ARE THE COMMANDS
+Permission denied: Secret.txt
+
+
+
+A key case on permssions 
+I run a python server on my main route
+AND alice or whoever does a GET/NOTES
+and i process the GET On my side 
+tht is open the file depenog on that nad yk send over the bytes 
+WITHOUT ANY API KEY REGEX ETC
+and full permisison over all my files 
+so thats a possible problme, but when ur user itslef has no permssion to read it might not be affecting
+
+
+ pgrep is one thing like its powerful as in like u cn yk read thru files scra it etc
+IT is  THAT ONE WAY LIKE a naive way hackers can try to steal when they  have access to  ur thing
+
+
+
+NEXT I prioratise 
+large-file performance benchmark on 100mb 1 gb and 5gb file , esp for larger directoreis how to asovle the speed thing 
