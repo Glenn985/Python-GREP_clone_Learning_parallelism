@@ -1,8 +1,8 @@
 # Python GREP Clone — Systems & Concurrency Learning Project
 
-A GREP-style text search tool built in Python as a hands-on project to explore **file I/O, memory management, concurrency, multiprocessing, inter-process communication, and performance benchmarking**.
+I built a  GREP-style text search tool built in Python as a hands-on project to explore **file I/O, memory management, concurrency, multiprocessing, inter-process communication, and performance benchmarking**.
 
-Rather than simply recreating `grep`, I used the project to experiment with different approaches to processing and searching large files and to understand where each approach performs well or poorly.
+Since this was more of a learning project instead of simply implementing `grep`, I used the project to experiment with different approaches to processing and searching large files and to understand where each approach performs well or poorly.
 
 ## Key Features & Experiments
 
@@ -13,11 +13,11 @@ Rather than simply recreating `grep`, I used the project to experiment with diff
   * Standard line-by-line file reading
   * Loading entire files into memory
   * Binary file processing
-  * Memory-mapped files using `mmap`
+  * Memory-mapped files using `mmap` 
 
 * Benchmarked retrieval/search times across the different approaches to understand their performance characteristics.
 
-* Tested the limitations of loading very large files directly into memory, including intentionally pushing the program to the point of **RAM exhaustion**, demonstrating why streaming and memory-mapped approaches can be preferable for large datasets.
+* Tested the limitations of loading very large files directly into memory, including  pushing the program to the point of **RAM exhaustion**, understanding  why streaming and memory-mapped approaches can be preferable for large datasets.
 
 ## Concurrency & Parallelism
 
@@ -49,7 +49,7 @@ This helped me explore:
 
 * Producer/consumer-style communication
 * Passing data between isolated processes
-* IPC overhead
+* IPC overhead ie the cost to run the interprocess itself
 * Coordinating multiple workers
 * Collecting and combining results
 
@@ -59,10 +59,8 @@ Tested the search implementations against large files in the range of approximat
 
 For some ~1 GB tests, search times reached roughly the **2-second range**, depending on the implementation and test conditions.
 
-Large files were divided into chunks and distributed across workers, which introduced additional problems such as ensuring that **chunk boundaries did not incorrectly split lines or search matches**.
 
 ## Performance Benchmarking
-
 Rather than assuming that a particular implementation would be faster, I benchmarked the different approaches and compared their behavior under different workloads.
 
 Experiments included:
